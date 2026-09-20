@@ -42,6 +42,12 @@
   --color-btn-secondary-border: #4285f4;
   --color-btn-secondary-text-disabled: #ccddf9;
 
+  /* Market-signal chips on the micro-certification card. These are not in
+     the published variable set, so the values are sampled from the Figma
+     render rather than read from a variable. */
+  --color-chip-demand: #efd3fa;
+  --color-chip-competition: #d3fae4;
+
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
 }
 

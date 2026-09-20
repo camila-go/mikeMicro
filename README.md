@@ -32,6 +32,8 @@ Figma's names so design and code refer to the same swatch:
 | `--color-grey-200` | `#e8e8e8` | disabled primary background |
 | `--color-slate-100` | `#b5b2b2` | disabled primary text |
 | `--color-slate-300` | `#424242` | body text (`AppMode/TextColor`) |
+| `--color-chip-demand` | `#efd3fa` | "high demand in NYC" chip (sampled) |
+| `--color-chip-competition` | `#d3fae4` | "low competition" chip (sampled) |
 
 The full ramp (`jetblue` 100 to 800, greys, slates, button and app-mode
 tokens) is in `src/index.css`.
@@ -59,7 +61,7 @@ whole section is a single 13488x3184 node, so per-frame access is required.
 
 - **Typeface.** Inter is a stand-in. The real text styles have not been read
   from Figma yet.
-- **Chip colours.** The "high demand in NYC" green and "low competition" blue
-  in the feed are not in the published variable set.
+- **Chip geometry.** The corner radius and padding on the market-signal chips
+  are approximations. The fill colours are exact.
 - **Dark mode.** The style sheet board includes dark variants of the buttons
   and the sign-in screen; not implemented yet.
