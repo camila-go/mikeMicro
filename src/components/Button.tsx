@@ -4,15 +4,15 @@ type Variant = 'primary' | 'secondary'
 
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   variant?: Variant
-  /* Buttons in the design run full width inside the phone frame, but the
-     Back/Next pairs sit side by side, so width is opt-in. */
+  /* Most buttons run the full 301px content width, but the Back/Next pairs
+     in the goals wizard sit side by side, so width is opt-in. */
   block?: boolean
 }
 
-/* Mirrors standardButton/* in Figma: filled brand blue for primary, white
-   with a blue hairline for secondary, plus the disabled pair. */
+/* Figma's lightBtn (3:1560) / darkBtn (3:1692) components: 52px tall, 12px
+   radius, Inter Bold 16. Colours come from the standardButton/* tokens. */
 const base =
-  'h-11 rounded-md px-4 text-sm font-semibold transition-colors ' +
+  'h-[52px] rounded-[12px] px-[12px] text-[16px] font-bold transition-colors ' +
   'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-jetblue-600 ' +
   'disabled:cursor-not-allowed'
 
