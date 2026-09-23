@@ -3,6 +3,7 @@ import type { ComponentType } from 'react'
 import { PendingScreen } from './components/PendingScreen'
 import { screens } from './data/screens'
 import Index from './screens/Index'
+import Join from './screens/Join'
 import SignIn from './screens/SignIn'
 import Splash from './screens/Splash'
 
@@ -11,6 +12,7 @@ import Splash from './screens/Splash'
 const built: Record<string, ComponentType> = {
   '/splash': Splash,
   '/sign-in': SignIn,
+  '/join': Join,
 }
 
 function App() {

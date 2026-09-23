@@ -33,18 +33,18 @@ export function TextField({
         <input
           id={id}
           required={required}
-          className={`h-[52px] w-full rounded-[12px] bg-grey-100 px-[12px] text-[16px] text-app-text placeholder:text-slate-200 focus:outline-2 focus:outline-offset-[-2px] focus:outline-jetblue-500 ${trailing ? 'pr-[44px]' : ''} ${className}`}
+          /* With a trailing control the design pads the field to pr-24 and
+             leaves a 10px gap before the 24px icon, so text stops at 58px. */
+          className={`h-[52px] w-full rounded-[12px] bg-grey-100 px-[12px] text-[16px] text-app-text placeholder:text-slate-200 focus:outline-2 focus:outline-offset-[-2px] focus:outline-jetblue-500 ${trailing ? 'pr-[58px]' : ''} ${className}`}
           {...props}
         />
         {trailing ? (
-          <span className="absolute inset-y-0 right-[12px] flex items-center">
+          <span className="absolute inset-y-0 right-[24px] flex items-center">
             {trailing}
           </span>
         ) : null}
       </div>
-      {hint ? (
-        <p className="text-[12px] leading-snug text-slate-200">{hint}</p>
-      ) : null}
+      {hint ? <p className="w-full text-[12px] text-app-text">{hint}</p> : null}
     </div>
   )
 }
