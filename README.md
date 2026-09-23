@@ -108,8 +108,25 @@ Built from design context, verified against the Figma render:
 - `/splash` — Sign In/0 (`29:1149`)
 - `/sign-in` — Sign In/1 (`3:2010`)
 - `/join` — Sign In/2 (`3:2093`) and Sign In/wForm (`48:7201`)
+- `/goals` — Profile/1 (`9:978`) unselected and (`48:7584`) selected
 
-The remaining 13 routes still render `PendingScreen`.
+The remaining routes render `PendingScreen`, which carries a Continue so the
+flow can be walked end to end rather than dead-ending on an unbuilt screen.
+
+### Figma layer names do not match the screens
+
+The "Profile Setup" section (`58:8319`) is the goals wizard, not profile
+screens, and its frames are named Profile/1 through Profile/5. The import,
+review and resume screens live in the Sign In section instead. Go by the
+frame's contents, not its name.
+
+### /import is a LinkedIn mockup
+
+`3:3213` is not a Mike screen. It is a mockup of LinkedIn's own app, in
+Roboto with LinkedIn blue, their search header, dashboard and bottom tab bar,
+included to show where the profile is imported from. Building it would mean
+cloning a third party's interface inside this app, so it is left unbuilt
+pending a decision.
 
 ### Open items
 

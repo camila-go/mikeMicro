@@ -8,6 +8,9 @@ type ScreenProps = {
   /* "column" is the default reading layout, a centred measure with gutters.
      "center" fills the viewport and centres in both axes, for the splash. */
   variant?: 'column' | 'center'
+  /* Full-width sticky bar above the column, for the wizard's step indicator.
+     It sits outside the gutters because the design runs it edge to edge. */
+  header?: ReactNode
 }
 
 /* The Figma frames are drawn at a fixed 375x812, but this renders as a real
@@ -32,9 +35,13 @@ export function Screen({
   children,
   className = 'bg-app-bg',
   variant = 'column',
+  header,
 }: ScreenProps) {
   return (
     <div className={`min-h-dvh ${className}`}>
+      {header ? (
+        <div className="sticky top-0 z-10 w-full">{header}</div>
+      ) : null}
       <div className={variants[variant]}>{children}</div>
     </div>
   )

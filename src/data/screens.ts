@@ -40,13 +40,19 @@ export const screens: Screen[] = [
     path: '/join',
     name: 'Join Mike',
     section: 'Onboarding',
-    frames: ['Join Mike (empty)', 'Join Mike (filled)'],
+    frames: ['Sign In/2 (3:2093)', 'Sign In/wForm (48:7201)'],
+    nodeId: '3:2093',
   },
   {
+    /* 3:3213 is a mockup of LinkedIn's own app, not a Mike screen: Roboto,
+       LinkedIn blue, their search header, dashboard and tab bar. It is in the
+       file to show where the profile is imported from. Reproducing it would
+       mean cloning a third party's interface inside this app, so it is
+       deliberately not built pending a decision. */
     path: '/import',
     name: 'Import profile',
     section: 'Onboarding',
-    frames: ['LinkedIn profile'],
+    frames: ['LinkedIn Profile Page (3:3213), a LinkedIn UI mockup'],
     nodeId: '3:3213',
   },
   {
@@ -68,10 +74,17 @@ export const screens: Screen[] = [
     frames: ['Digitize your resume with AI (empty)', '(filled)'],
   },
   {
+    /* Labelled Profile/1 in Figma, but it is the goals step. The whole
+       "Profile Setup" section (58:8319) is the goals wizard, not profile
+       screens. */
     path: '/goals',
     name: 'What can we help with?',
     section: 'Goals',
-    frames: ['empty', 'selected', 'keyboard', 'filled'],
+    frames: [
+      'Profile/1 (9:978) unselected',
+      'Profile/1 (48:7584) selected',
+    ],
+    nodeId: '9:978',
   },
   {
     path: '/goals/timeline',
