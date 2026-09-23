@@ -1,16 +1,20 @@
-import { PhoneFrame } from './PhoneFrame'
+import { Link } from 'react-router-dom'
+import { Screen } from './Screen'
 
-/* Placeholder for screens still waiting on design context from the Figma
-   Dev Mode MCP server. Replaced screen by screen as each frame is pulled. */
+/* Placeholder for screens still waiting on design context from Figma.
+   Replaced screen by screen as each frame is pulled. */
 export function PendingScreen({ name }: { name: string }) {
   return (
-    <PhoneFrame>
-      <div className="flex flex-1 flex-col items-center justify-center gap-2 px-8 text-center">
-        <p className="text-base font-semibold text-slate-300">{name}</p>
-        <p className="text-xs text-slate-200">
+    <Screen variant="center">
+      <div className="flex flex-col items-center gap-2 text-center">
+        <p className="text-[16px] font-bold text-app-text">{name}</p>
+        <p className="text-[14px] text-slate-200">
           Waiting on design context from Figma.
         </p>
+        <Link to="/" className="mt-2 text-[14px] font-bold text-app-link">
+          All screens
+        </Link>
       </div>
-    </PhoneFrame>
+    </Screen>
   )
 }

@@ -27,11 +27,7 @@ function App() {
             <Route
               key={screen.path}
               path={screen.path}
-              element={
-                <div className="flex min-h-svh items-start justify-center py-8">
-                  {Built ? <Built /> : <PendingScreen name={screen.name} />}
-                </div>
-              }
+              element={Built ? <Built /> : <PendingScreen name={screen.name} />}
             />
           )
         })}

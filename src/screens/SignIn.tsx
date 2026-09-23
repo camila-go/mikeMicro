@@ -3,19 +3,19 @@ import { Link, useNavigate } from 'react-router-dom'
 import checkboxChecked from '../assets/icons/checkbox-checked.svg'
 import { Button } from '../components/Button'
 import { Divider } from '../components/Divider'
-import { PhoneFrame } from '../components/PhoneFrame'
+import { Screen } from '../components/Screen'
 import { SocialButton } from '../components/SocialButton'
 import { TextField } from '../components/TextField'
 
-/* Figma: Sign In/1 (3:2010). Frame padding is 37px horizontal and 80px
-   vertical, which leaves the 301px content column. */
+/* Figma: Sign In/1 (3:2010). Gutters and the content measure now come from
+   Screen, so this only owns the form itself. */
 export default function SignIn() {
   const navigate = useNavigate()
   const [remember, setRemember] = useState(true)
 
   return (
-    <PhoneFrame>
-      <div className="flex flex-col px-[37px] py-[80px]">
+    <Screen>
+      <div className="flex flex-col">
         <div className="flex flex-col gap-[20px] py-[24px]">
           <div className="flex flex-col gap-[12px] pb-[24px]">
             <h1 className="text-[24px] font-bold text-app-text">Sign in</h1>
@@ -81,6 +81,6 @@ export default function SignIn() {
           Continue
         </Button>
       </div>
-    </PhoneFrame>
+    </Screen>
   )
 }

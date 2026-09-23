@@ -53,22 +53,19 @@
   --color-social-border: #747775;
 
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+
+  /* The design is drawn at 375 wide with 37px gutters. Below that the gutters
+     tighten, so a 320px phone keeps a usable measure. */
+  --breakpoint-xs: 375px;
 }
 
 @layer base {
   body {
-    @apply m-0 bg-grey-100 text-app-text antialiased;
+    @apply m-0 bg-app-bg text-app-text antialiased;
     font-family: var(--font-sans);
     /* Every text node in the design uses Figma's Auto line height, which for
        Inter is about 1.21. Tailwind's preflight would apply 1.5 instead and
-       add a few px to each line, which compounds down a screen: it put the
-       sign-in form 19px past the bottom of an 812px frame. */
+       add a few px to each line, which compounds down a screen. */
     line-height: normal;
-  }
-
-  /* The prototype renders phone frames on a desktop canvas, so the page
-     itself should never scroll sideways when a frame is wider than the tab. */
-  html {
-    overflow-x: clip;
   }
 }

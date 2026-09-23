@@ -3,23 +3,20 @@ import { Link, useNavigate } from 'react-router-dom'
 import visibilityOff from '../assets/icons/visibility-off.svg'
 import { Button } from '../components/Button'
 import { Divider } from '../components/Divider'
-import { PhoneFrame } from '../components/PhoneFrame'
+import { Screen } from '../components/Screen'
 import { SocialButton } from '../components/SocialButton'
 import { TextField } from '../components/TextField'
 
 /* Figma: Sign In/2 (3:2093) for the empty state and Sign In/wForm (48:7201)
    for the filled one. Both are the same screen, so the filled frame is just
-   this one with values typed in. The frame is 964 tall against an 812
-   viewport, so it scrolls. */
+   this one with values typed in. */
 export default function Join() {
   const navigate = useNavigate()
   const [showPassword, setShowPassword] = useState(false)
 
   return (
-    <PhoneFrame>
-      {/* The generator reports py-80, but the frame's own geometry puts the
-          content block at y=80 in a 964 tall frame with 44px beneath it. */}
-      <div className="flex flex-col px-[37px] pb-[44px] pt-[80px]">
+    <Screen>
+      <div className="flex flex-col">
         <div className="flex w-full flex-col items-center gap-[12px]">
           <div className="flex w-full flex-col gap-[6px]">
             <h1 className="text-[24px] font-bold text-app-text">Join Mike</h1>
@@ -104,18 +101,14 @@ export default function Join() {
           <Divider label="or" />
         </div>
 
-        <div className="flex w-full flex-col gap-[12px] pt-[12px]">
-          <div className="flex w-full flex-col items-center">
-            <SocialButton provider="linkedin">Continue with LinkedIn</SocialButton>
-            <SocialButton provider="google">Continue with Google</SocialButton>
-          </div>
-          {/* Drawn in the frame but set to transparent, so it acts as a
-              spacer. Kept so the screen's height matches the design. */}
-          <p aria-hidden className="text-[12px] font-bold text-transparent">
-            Forgot password?
-          </p>
+        {/* The frame also carries a transparent "Forgot password?" label,
+            which only existed to pad out its fixed height. Dropped, since
+            nothing here is a fixed height any more. */}
+        <div className="flex w-full flex-col items-center pt-[12px]">
+          <SocialButton provider="linkedin">Continue with LinkedIn</SocialButton>
+          <SocialButton provider="google">Continue with Google</SocialButton>
         </div>
       </div>
-    </PhoneFrame>
+    </Screen>
   )
 }

@@ -16,9 +16,9 @@ npm install
 npm run dev
 ```
 
-The root route `/` is a directory of every screen in the prototype. It is not
-a designed screen, just a way to reach all 16 routes without clicking through
-the whole flow.
+The root route `/` is a directory of every screen, plus the primitives taken
+from the style sheet board. It is not a designed screen, just a way to reach
+all 16 routes and review the components without clicking through the flow.
 
 ## Design tokens
 
@@ -64,19 +64,37 @@ Exported assets are committed under `src/assets/`. The Dev Mode server serves
 them from `localhost:3845`, which only works while it is running, so the bytes
 are checked in rather than referenced.
 
+## Responsive, not a phone mockup
+
+The Figma frames are drawn at a fixed 375x812 on an iPhone X, but this builds
+as a real responsive app. The device framing is deliberately not reproduced:
+
+- No iOS status bar, notch, time, or signal and battery glyphs, and no
+  `viewport-fit=cover`. Those assets are not in the repo.
+- No fixed frame height. Pages are `min-h-dvh` and scroll normally, so the
+  frames that are taller than 812 in Figma are simply longer pages here.
+- `Screen` owns the layout. Gutters are the design's 37px from 375px up, which
+  reproduces its 301px content column exactly at that width, and tighten to
+  24px below it so a 320px phone keeps a usable measure. The column caps at
+  420px so forms do not stretch across a desktop.
+
+Vertical padding is lighter than the design's 80px, because that 80px
+included the 44px status bar that no longer exists.
+
+Verified: content is 272px at 320 wide, exactly 301px at 375, and a centred
+420px column at 1280, with no horizontal scroll at any of them.
+
 ## Known generator quirks
 
-Two things the code generator reports incorrectly, both confirmed by
-rendering the nodes on their own:
-
-- **Status bar.** It exports the base component's black glyphs and omits the
-  SystemBlue pill behind the time. Figma renders the pill on every screen,
-  white label on `#007aff` for light screens and `#0a84ff` on the splash. The
-  pill is drawn in `StatusBar` and the exported glyph vector is tinted through
-  a CSS mask so the real letterforms are still used.
-- **Frame padding.** It reports symmetric `py-80`. On Join the frame actually
-  places its content at y=80 inside a 964 tall frame, leaving 44px beneath.
-  Check a frame's own geometry before trusting the reported padding.
+- **Frame padding.** The generator reports symmetric `py-80`. On Join the
+  frame actually places its content at y=80 inside a 964 tall frame, leaving
+  44px beneath. Check a frame's own geometry before trusting the reported
+  padding.
+- **Component instances.** It exports the base component rather than the
+  instance's variant. On the status bar it gave black glyphs and dropped the
+  SystemBlue pill behind the time, which rendering the component on its own
+  disproved. That particular case is moot now the status bar is gone, but the
+  same trap applies to any instance with overrides.
 
 Also note Tailwind's preflight sets `line-height: 1.5` while every Figma text
 node uses Auto leading (about 1.21 for Inter). The few px per line compound:
@@ -103,5 +121,9 @@ The remaining 13 routes still render `PendingScreen`.
   are approximations. The fill colours are exact.
 - **Dark mode.** The style sheet board includes dark variants of the buttons
   and the sign-in screen; not implemented.
-- **"Forgot password?"** is drawn on Join but set to transparent, so it is kept
-  as a spacer. Worth confirming that is deliberate.
+- **"Forgot password?"** is drawn on Join but set to transparent. It only
+  padded out the frame's fixed height, so it is dropped here. Worth confirming
+  it was not meant to be a real link.
+- **App Experience navigation.** Those frames use a bottom tab bar with a
+  centre AI button. On wider screens that will want to become a side or top
+  nav rather than a bar pinned to the bottom of a desktop window.
