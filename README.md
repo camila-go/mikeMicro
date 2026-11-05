@@ -5,6 +5,42 @@ Education customized to take you further.
 A mobile prototype built from the Figma file **Mike Microcredentials**, section
 `Mobile experience` (node `58:8500`).
 
+## The AI tier
+
+Mike's two AI moments actually run against Claude:
+
+- **`/resume`** posts the resume to `/api/parse-resume`, which returns a
+  structured profile. `/profile-review` renders that output, so it is a real
+  review screen rather than a mock.
+- **`/learning-path`** posts that profile plus the goals the wizard collected
+  to `/api/recommend`, which returns micro-credentials with a rationale that
+  refers to the person's actual experience.
+
+Model is `claude-opus-5-5`. Responses are constrained with structured outputs
+(`client.messages.parse` + `zodOutputFormat`) against the schemas in
+`shared/schemas.ts`, which mirror what the designed screens render, so the
+model cannot return a shape the UI cannot show. Extraction runs at `low`
+effort; the recommendation call, which is the judgement the product exists to
+make, runs at `high`.
+
+### Setup
+
+```bash
+cp .env.example .env.local
+```
+
+Put your key in `.env.local`. It is read server-side only and is gitignored.
+Never give it a `VITE_` prefix: that would inline it into the browser bundle
+and publish it to anyone who loads the page. Without a key the endpoints
+return 503 and the UI shows that as a message rather than failing silently.
+
+### Where the server runs
+
+`server/routes.ts` holds one dispatch table used by both entry points: the
+Vercel functions in `api/` in production, and a dev middleware in
+`vite.config.ts` so `npm run dev` serves the full app including the API. Local
+behaviour therefore exercises the same handler that ships.
+
 ## Stack
 
 Vite + React 19 + TypeScript + Tailwind 4 + React Router 7, matching the

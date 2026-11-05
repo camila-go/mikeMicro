@@ -5,6 +5,7 @@ import { Callout } from '../components/Callout'
 import { ChoiceButton } from '../components/ChoiceButton'
 import { Screen } from '../components/Screen'
 import { Stepper } from '../components/Stepper'
+import { useAppState } from '../state/appContext'
 
 const options = [
   'I want to up skill in my career',
@@ -22,7 +23,8 @@ const options = [
    height. */
 export default function Goals() {
   const navigate = useNavigate()
-  const [selected, setSelected] = useState<string | null>(null)
+  const { goals, setGoals } = useAppState()
+  const [selected, setSelected] = useState<string | null>(goals.intent || null)
 
   return (
     <Screen
@@ -56,7 +58,10 @@ export default function Goals() {
               <ChoiceButton
                 key={option}
                 selected={selected === option}
-                onClick={() => setSelected(option)}
+                onClick={() => {
+                  setSelected(option)
+                  setGoals({ intent: option })
+                }}
               >
                 {option}
               </ChoiceButton>
@@ -73,6 +78,8 @@ export default function Goals() {
             <textarea
               id="goals-note"
               rows={1}
+              defaultValue={goals.note}
+              onChange={(event) => setGoals({ note: event.target.value })}
               placeholder="Write your goals here"
               className="w-full resize-y rounded-[12px] bg-grey-100 px-[12px] py-[14px] text-[14px] text-app-text placeholder:text-slate-200 focus:outline-2 focus:outline-offset-[-2px] focus:outline-jetblue-500"
             />

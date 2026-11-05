@@ -25,3 +25,7 @@ dist-ssr
 
 # Local-only notes (deployment runbook, DNS, ops)
 *.local.md
+
+# local secrets
+.env.local
+.env

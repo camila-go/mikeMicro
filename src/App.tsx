@@ -5,6 +5,9 @@ import { screens } from './data/screens'
 import Goals from './screens/Goals'
 import Index from './screens/Index'
 import Join from './screens/Join'
+import LearningPath from './screens/LearningPath'
+import ProfileReview from './screens/ProfileReview'
+import Resume from './screens/Resume'
 import SignIn from './screens/SignIn'
 import Splash from './screens/Splash'
 
@@ -15,6 +18,9 @@ const built: Record<string, ComponentType> = {
   '/sign-in': SignIn,
   '/join': Join,
   '/goals': Goals,
+  '/resume': Resume,
+  '/profile-review': ProfileReview,
+  '/learning-path': LearningPath,
 }
 
 function App() {
